@@ -15,7 +15,7 @@ var ccd1GeneratorMods = require('../xmlmods/ccd1Generator');
 var viteraParserMods = require('../xmlmods/viteraParser');
 var viteraGeneratorMods = require('../xmlmods/viteraGenerator');
 
-xdescribe('xml vs parse generate xml ', function () {
+describe('xml vs parse generate xml ', function () {
   var generatedDir = null;
   var sampleDir = null;
 

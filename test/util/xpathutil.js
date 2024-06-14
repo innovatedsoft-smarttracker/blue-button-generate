@@ -55,7 +55,7 @@ var actions = [{
 }, {
   key: "removeAttribute",
   implementation: function (node, attr) {
-    var attrNode = node.attr(attr);
+    var attrNode = node.getAttribute(attr);
     if (attrNode) {
       attrNode.remove();
     }
@@ -93,9 +93,9 @@ var actions = [{
 }, {
   key: "normalizeTelNumber",
   implementation: function (node) {
-    var attrNode = node.attr('value');
+    var attrNode = node.getAttribute('value');
     if (attrNode) {
-      var value = attrNode.value().toString();
+      var value = attrNode.toString();
       if (value.substring(0, 4) !== 'tel:') {
         var newValue = 'tel:' + value;
         attrNode.value(newValue);
@@ -105,9 +105,9 @@ var actions = [{
 }, {
   key: "removeTimezone",
   implementation: function (node) {
-    var attrNode = node.attr('value');
+    var attrNode = node.getAttribute('value');
     if (attrNode) {
-      var t = attrNode.value().toString();
+      var t = attrNode.toString();
       var newT = t.slice(0, 8); // Ignore time for now
       attrNode.value(newT);
     }
@@ -115,9 +115,9 @@ var actions = [{
 }, {
   key: "removeZeros",
   implementation: function (node) {
-    var attrNode = node.attr('value');
+    var attrNode = node.getAttribute('value');
     if (attrNode) {
-      var v = attrNode.value().toString();
+      var v = attrNode.toString();
       var n = v.length;
       var index = v.indexOf('.0');
       if ((index >= 0) && ((index + 2) === n)) {
@@ -143,13 +143,13 @@ var actions = [{
 }, {
   key: "normalize",
   implementation: function (node, params) {
-    var attrNode = node.attr(params.attr);
+    var attrNode = node.getAttribute(params.attr);
     var value = attrNode.value();
     var replacementInfo = params.map[value];
     if (replacementInfo) {
       var replacementValue;
       if (typeof replacementInfo === 'object') {
-        var srcAttrValue = node.attr(params.srcAttr).value();
+        var srcAttrValue = node.getAttribute(params.srcAttr).value();
         if (srcAttrValue === replacementInfo.src) {
           replacementValue = replacementInfo.value;
         }
@@ -204,8 +204,8 @@ var doModifications = (function () {
 })();
 
 exports.modifyXML = function (xml, modifications) {
-  var xmlDoc = libxmljs.parseXmlString(xml, {
-    noblanks: true
+  var xmlDoc = libxmljs.parseXml(xml, {
+    preserveWhitespace: true
   });
   doModifications(xmlDoc, modifications);
   var result = xmlDoc.toString();
