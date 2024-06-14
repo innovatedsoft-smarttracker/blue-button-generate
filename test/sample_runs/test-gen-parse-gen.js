@@ -3,7 +3,7 @@ var path = require('path');
 var bb = require('@amida-tech/blue-button');
 var bbg = require('../../index');
 
-xdescribe('parse generate parse generate', function () {
+describe('parse generate parse generate', function () {
   var generatedDir = null;
 
   beforeAll(function () {
@@ -12,7 +12,7 @@ xdescribe('parse generate parse generate', function () {
   });
 
   it('CCD_1 should still be same', function () {
-    var data = fs.readFileSync(__dirname + "/../fixtures/files/ccda_xml/CCD_1.xml").toString();
+    var data = fs.readFileSync(__dirname + "/../fixtures/files/ccda_xml/CCD_1.xml").toString('utf8');
     var result = bb.parseString(data);
 
     // check validation
@@ -26,9 +26,6 @@ xdescribe('parse generate parse generate', function () {
     var result2 = bb.parseString(xml);
     var val2 = bb.validator.validateDocumentModel(result2);
     expect(val2).toBe(true);
-
-    // re-generate
-    var xml2 = bbg.generateCCD(result2);
 
     delete result.errors;
     delete result2.errors;

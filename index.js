@@ -5,6 +5,7 @@ This script converts CCDA data in JSON format (originally generated from a Conti
 standard XML/CCDA format) back to XML/CCDA format.
 */
 
+var _ = require('lodash');
 var bbu = require("@amida-tech/blue-button-util");
 
 var engine = require('./lib/engine');
@@ -32,7 +33,7 @@ var createContext = (function () {
     var result = Object.create(base);
     result.references = {};
     if (options.meta && options.addUniqueIds) {
-      result.rootId = bbuo.deepValue(options.meta, 'identifiers.0.identifier');
+      result.rootId = _.get(options.meta, 'identifiers.0.identifier');
     } else {
       result.rootId = null;
     }
@@ -43,18 +44,18 @@ var createContext = (function () {
 })();
 
 var generate = exports.generate = function (template, input, options) {
-  if (!options.html_renderer) {
-    options.html_renderer = html_renderer;
-  }
-
   var context = createContext(options);
-  return engine.create(documentLevel.ccd2(options.html_renderer), input, context);
+  return engine.create(template, input, context);
 };
 
 exports.generateCCD = function (input, options) {
   options = options || {};
   options.meta = input.meta;
-  return generate(documentLevel.ccd, input, options);
+  if (!options.html_renderer) {
+    options.html_renderer = html_renderer;
+  }
+  const template = documentLevel.ccd2(options.html_renderer) || documentLevel.ccd;
+  return generate(template, input, options);
 };
 
 exports.fieldLevel = require("./lib/fieldLevel");
