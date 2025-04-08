@@ -1,5 +1,5 @@
 {
-  "name": "@amida-tech/blue-button-generate",
+  "name": "@smarttracker/blue-button-generate",
   "version": "1.5.10",
   "description": "Blue Button CCDA Generator.",
   "main": "./index.js",
@@ -7,28 +7,16 @@
     "./lib/xmlutil.js": "./browser/lib/xmlutil.js"
   },
   "directories": {
-    "doc": "doc",
-    "lib": "lib"
+    "doc": "docs",
+    "lib": "lib",
+    "test": "test"
   },
   "scripts": {
     "test": "grunt test",
     "coverage": "grunt coverage"
   },
-  "author": "Dmitry Kachaev <dmitry@amida-tech.com>",
-  "contributors": [
-    {
-      "name": "Matthew McCall",
-      "email": "matt@amida-tech.com"
-    },
-    {
-      "name": "Afsin Ustundag",
-      "email": "afsin.ustundag@us.pwc.com"
-    },
-    {
-      "name": "Matt Martz",
-      "email": "matt.martz@amida-tech.com"
-    }
-  ],
+  "author": "Alexander Maskeny <alex@smarttracker.health>",
+  "contributors": [],
   "license": "Apache-2.0",
   "engines": {
     "node": ">= 14.19.3"
@@ -57,14 +45,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/amida-tech/blue-button-generate.git"
+    "url": "https://github.com/innovatedsoft-smarttracker/blue-button-generate.git"
   },
   "keywords": [
     "bluebutton",
     "ccda"
   ],
   "bugs": {
-    "url": "https://github.com/amida-tech/blue-button-generate/issues"
+    "url": "https://github.com/innovatedsoft-smarttracker/blue-button-generate/issues"
   },
-  "homepage": "https://github.com/amida-tech/blue-button-generate"
+  "homepage": "https://github.com/innovatedsoft-smarttracker/blue-button-generate"
 }
